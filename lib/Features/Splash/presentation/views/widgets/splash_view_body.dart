@@ -1,3 +1,4 @@
+import 'package:bookly_app/Features/Splash/presentation/views/widgets/sliding_text.dart';
 import 'package:bookly_app/core/utils/app_router.dart';
 import 'package:bookly_app/core/utils/assets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
-
+ 
   @override
   void initState() {
     super.initState();
@@ -39,25 +40,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
         const SizedBox(
           height: 3,
         ),
-        AnimatedBuilder(
-          animation: slidingAnimation,
-          builder: (context, _) {
-            return SlideTransition(
-              position: slidingAnimation,
-              child: const Text(
-                'Read Free Books',
-                textAlign: TextAlign.center,
-              ),
-            );
-          },
-        ),
+        SlidingText(slidingAnimation: slidingAnimation),
       ],
     );
   }
 
   void pushHomeView() {
     Future.delayed(const Duration(seconds: 2), () {
-      GoRoute(path: AppRotuer.kHomeView);
+      GoRouter.of(context).push(AppRotuer.kHomeView);
     });
   }
 
@@ -71,3 +61,5 @@ class _SplashViewBodyState extends State<SplashViewBody>
     animationController.forward();
   }
 }
+
+
