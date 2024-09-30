@@ -6,9 +6,9 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const  Scaffold(
-      body:  Padding(
-       padding: EdgeInsets.symmetric(horizontal: 18),
+    return const Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 18),
         child: SearchViewBody(),
       ),
     );

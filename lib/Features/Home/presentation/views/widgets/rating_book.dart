@@ -9,19 +9,19 @@ class RatingBook extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         Icon(
+        Icon(
           Icons.star_rate_rounded,
           color: Colors.yellow,
           size: 30,
         ),
-         SizedBox(
+        SizedBox(
           width: 1,
         ),
-         Text(
+        Text(
           '4.5',
           style: Styles.textStyle18,
         ),
-         SizedBox(
+        SizedBox(
           width: 3,
         ),
         Opacity(
