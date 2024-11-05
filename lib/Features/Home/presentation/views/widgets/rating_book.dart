@@ -2,11 +2,12 @@ import 'package:bookly_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class RatingBook extends StatelessWidget {
-  const RatingBook({super.key});
-
+   RatingBook({super.key,  required this.rate,  required this.numberOfRates});
+  final String rate;
+ final  int numberOfRates;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return  Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
@@ -18,7 +19,7 @@ class RatingBook extends StatelessWidget {
           width: 1,
         ),
         Text(
-          '4.5',
+          rate,
           style: Styles.textStyle18,
         ),
         SizedBox(
@@ -27,7 +28,7 @@ class RatingBook extends StatelessWidget {
         Opacity(
           opacity: .7,
           child: Text(
-            '(265)',
+            '($numberOfRates)',
             style: Styles.textStyle16,
           ),
         )

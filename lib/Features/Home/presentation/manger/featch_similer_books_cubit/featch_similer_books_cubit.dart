@@ -5,23 +5,23 @@ import 'package:bookly_app/core/errors/failuers.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-part 'featch_feature_books_state.dart';
+part 'featch_similer_books_state.dart';
 
-class FeatchFeatureBooksCubit extends Cubit<FeatchFeatureBooksState> {
-  FeatchFeatureBooksCubit(this.homeRepo) : super(FeatchFeatureBooksInitial());
+class FeatchSimilerBooksCubit extends Cubit<FeatchSimilerBooksState> {
+  FeatchSimilerBooksCubit(this.homeRepo) : super(FeatchSimilerBooksInitial());
 
   final HomeRepo homeRepo;
 
-  Future<void> featchFeatureBooks() async {
-    emit(FeatchFeatureBooksLoading());
+  featchSimilerBooks(String category) async {
+    emit(FeatchSimilerBooksLoading());
     Either<Failure, List<BookModel>> result =
-        await homeRepo.featchFeatureBooks();
+        await homeRepo.featchSimilerBooks(category: category);
     result.fold(
       (Failure) {
-        emit(FeatchFeatureBooksFailuer(errMessage: Failure.errMessage));
+        emit(FeatchSimilerBooksFailure(errMessage: Failure.errMessage));
       },
       (books) {
-        emit(FeatchFeatureBooksSuccess(books: books));
+        emit(FeatchSimilerBooksSuccess(books: books));
       },
     );
   }

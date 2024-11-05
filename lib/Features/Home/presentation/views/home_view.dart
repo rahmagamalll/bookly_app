@@ -10,13 +10,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FeatchNewestBooksCubit(getIt<HomeRepoImpl>())..featchNewestBooks(),// call without result .. featch data and keep in list (init)
-      child: const Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18),
-          child: HomeViewBody(),
-        ),
+    return const Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 18),
+        child: HomeViewBody(),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/utils/models/book_model/book_model.dart';
 import 'package:bookly_app/Features/Home/presentation/views/widgets/custom_book_item.dart';
 import 'package:bookly_app/Features/Home/presentation/views/widgets/rating_book.dart';
 import 'package:bookly_app/core/utils/app_router.dart';
@@ -6,19 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({super.key});
+  const BookListViewItem({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRotuer.kBookDetailsView);
+        GoRouter.of(context).push(AppRotuer.kBookDetailsView,extra: bookModel);
       },
       child: SizedBox(
         height: 130,
         child: Row(
           children: [
-            const CustomBookItem(imageUrl: '5555',),
+            CustomBookItem(
+              imageUrl: bookModel.volumeInfo?.imageLinks?.thumbnail ?? '',
+              isNetworkImage: true,
+            ),
             const SizedBox(
               width: 12,
             ),
@@ -29,7 +34,7 @@ class BookListViewItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      'The Action Book The Action Book ',
+                      bookModel.volumeInfo?.title! ?? '',
                       style: Styles.textStyle20
                           .copyWith(fontFamily: 'GT Sectra Fine'),
                       maxLines: 2,
@@ -39,24 +44,27 @@ class BookListViewItem extends StatelessWidget {
                   const SizedBox(
                     height: 2,
                   ),
-                  const Opacity(
+                  Opacity(
                     opacity: 0.8,
                     child: Text(
-                      'The Action Book',
+                      bookModel.volumeInfo?.authors?[0]?? '',
                       style: Styles.textStyle16,
                     ),
                   ),
                   const SizedBox(
                     height: 2,
                   ),
-                  const Row(
+                  Row(
                     children: [
-                      Text(
-                        r'19.99$',
+                     const Text(
+                        'Free',
                         style: Styles.textStyle20,
                       ),
-                      Spacer(),
-                      RatingBook()
+                  const Spacer(),
+                      RatingBook(
+                        numberOfRates: bookModel.volumeInfo?.pageCount ?? 0, // Handle null pageCount
+                        rate: '4.5'
+                      )
                     ],
                   ),
                 ],
